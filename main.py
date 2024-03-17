@@ -1,59 +1,44 @@
-from project2 import *
-from product import *
-class order:
-    print("existing user or new user")
-    g=int(input())
-    obj=Abc()
-    if g==1:
-        username=input("enter username:")
-        password=input("enter password:")
-        phoneno=int(input("enter phoneno:"))
-        pincode=int(input("enter pincode:"))
-        obj.registration(username,password,phoneno,pincode)
-        print("registeration successful")
-    elif g==2:
-        username=input("enter user name:")
-        password=input("enter password:")
-        if obj.login(username,password):
-            print("login successful")
-            print("products are: electronic ,clothes,books")           
-            h=input()
-            obj1=Efg()
-            if h=="electronic":
-                print("products in electronics are 1.laptop 2.mobile")
-                s=input(" choose laptop or mobile")
-                if s=="laptop":
-                    quan=10
-                    print("laptop quantity is",quan)
-                    obj1.Product(h,s,quan)
-                else:
-                    quan=15
-                    print("mobile quantity is",quan)
-                    obj1.Product(h,s,quan)
-            elif h=="clothes":
-                print("clothes are 1.pant 2.shirt")
-                s=input("choose pant or shirt")
-                if s=="pant":
-                    quan=20
-                    print("pants are",quan)
-                    obj1.Product(h,s,quan)
-                else:
-                    quan=25
-                    print("shirts are",quan)
-                    obj1.Product(h,s,quan)
-            elif h=="books":
-                print("books are 1.schand 2.cengage")
-                s=input("choose 1.schand 2.cengage")
-                if s=="schand":
-                    quan=20
-                    print("schand qunatity is",quan)
-                    obj1.Product(h,s,quan)
-                else:
-                    quan=30
-                    print("cengage quantity is",quan)
-                    obj1.Product(h,s,quan)
-            
-            else:
-                print("enter valid product")
-    else:
-        print("wrong details try again")
+from remainingamount import remainingamount
+from passwordchecking import passwordchecking
+from operationsofatm import check_balance, withdraw, deposit
+from limit import limit
+
+def main():
+    rem_amo=1500000
+    bank=1000
+    check_balance(rem_amo)
+    print("")
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+    if passwordchecking(username, password):
+        print("Authentication successful.")
+        print("Choose an option:")
+        print("1. Check Balance")
+        print("2. Cash Withdrawal")
+        print("3. Cash Deposit")
+        print("4.Card Type")
+        option = int(input("Enter option: "))
+        
+        match option:
+            case 1:
+                check_balance(bank)
+                
+            case 2:
+                amo = int(input("Enter the amount to be withdrawn: "))
+                withdraw(amo, bank)
+      
+            case 3:
+                amo = int(input("Enter the amount to be deposited: "))
+                if deposit(bank,amo):
+                    print("Cash deposited successfully")
+            case 4:
+                card=input("Enter the card type you have('1.Rupay','2.Visa','3.Mastercard'):")
+                cards=get_withdrawal_limit(card)
+                print("limit for this card is:",cards)
+                
+                    
+                
+            case __:
+                print("Authentication failed, invalid username and password")
+
+obj=main()
